@@ -12,7 +12,7 @@ public:
 	RGBQUAD * getPixels() const;
 	/*Return colors. Don't delete this pointer!*/
 	sf::Color * getColors() const;
-
+	sf::Vector2u getSize() const;
 	sf::Color getColor(const int &x, const int &y) const;
 	sf::Color getColor(const int &number) const;
 
@@ -30,6 +30,7 @@ private:
 	//SFML
 	sf::Image image;
 	sf::Texture texture;
+	sf::Vector2u size;
 
 	
 

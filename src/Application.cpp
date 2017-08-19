@@ -25,26 +25,26 @@ void Application::run() {
 	Application &instance = getInstance();
 	instance.hwnd = FindWindow(NULL, instance.windowName.c_str());
 	if (instance.hwnd == NULL)
-		;
+		return;
 
-	ImageSource raw(sf::IntRect(0, 0, 200, 200), instance.hwnd);
+	ImageSource raw(sf::IntRect(200, 200, 200, 200), instance.hwnd);
 
-	AsciiDisplay ascii({ 128,72 }, 5);
+	sf::Vector2u asciiSize = { 426, 144 };
+	AsciiDisplay ascii(asciiSize, 5);
 
+	sf::Clock clock;
 
-
-	sf::RectangleShape shape;
-	shape.setSize({100, 100});
-
-	std::cout << "Helo\n";
 	while (instance.window.isOpen()) {
+		std::cout << 1.f / clock.getElapsedTime().asSeconds() << std::endl;
+		clock.restart();
 		input();
 
 		raw.update();
-		shape.rotate(1.f);
+		ascii.update(raw, asciiSize);
+
 		instance.window.clear(sf::Color(37, 37, 48));
+		//instance.window.draw(raw);
 		instance.window.draw(ascii);
-		instance.window.draw(shape);
 		instance.window.display();
 	}
 }

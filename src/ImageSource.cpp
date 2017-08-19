@@ -15,6 +15,11 @@ sf::Color * ImageSource::getColors() const
 	return colors;
 }
 
+sf::Vector2u ImageSource::getSize() const
+{
+	return size;
+}
+
 
 
 sf::Color ImageSource::getColor(const int & x, const int & y) const
@@ -29,7 +34,8 @@ sf::Color ImageSource::getColor(const int & number) const
 
 ImageSource::ImageSource(const sf::IntRect & rect, const HWND &hwnd) :
 	rect(rect),
-	hwnd(hwnd)
+	hwnd(hwnd),
+	size({ (unsigned)rect.width, (unsigned)rect.height })
 {
 	//HWND hDesktopWnd = hwnd;
 	hDesktopDC = GetDC(hwnd);
@@ -64,12 +70,12 @@ void ImageSource::update(){
 
 	for (int y = 0; y < rect.height; y++) {
 		for (int x = 0; x < rect.width; x++) {
-			sf::Color *tempClr = colors + (((rect.height - 1) - y)*rect.width + x);
+			//sf::Color *tempClr = colors + (((rect.height - 1) - y)*rect.width + x);
 
-			*tempClr = (pixels[y*rect.width + x].rgbGreen < 100) ? sf::Color::Black : sf::Color::White;
+			RGBQUAD pix = pixels[y*rect.width + x];
+			sf::Color tempClr(pix.rgbRed, pix.rgbGreen, pix.rgbBlue);
 
-
-			image.setPixel(x, (rect.height-1)-y, *tempClr);
+			image.setPixel(x, (rect.height-1)-y, tempClr);
 		}
 	}
 	texture.loadFromImage(image);
