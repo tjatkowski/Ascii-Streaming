@@ -32,6 +32,12 @@ sf::Color ImageSource::getColor(const int & number) const
 	return colors[number];
 }
 
+void ImageSource::move(const sf::Vector2f & offset)
+{
+	rect.left += offset.x;
+	rect.top += offset.y;
+}
+
 ImageSource::ImageSource(const sf::IntRect & rect, const HWND &hwnd) :
 	rect(rect),
 	hwnd(hwnd),
@@ -76,6 +82,7 @@ void ImageSource::update(){
 			sf::Color tempClr(pix.rgbRed, pix.rgbGreen, pix.rgbBlue);
 
 			image.setPixel(x, (rect.height-1)-y, tempClr);
+			colors[y*rect.width + x] = tempClr;
 		}
 	}
 	texture.loadFromImage(image);

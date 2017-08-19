@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include <vector>
 #include "ImageSource.h"
+#include <iostream>
 
 class AsciiDisplay : public sf::Drawable {
 public:

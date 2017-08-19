@@ -27,23 +27,36 @@ void Application::run() {
 	if (instance.hwnd == NULL)
 		return;
 
-	ImageSource raw(sf::IntRect(200, 200, 200, 200), instance.hwnd);
+	ImageSource raw(sf::IntRect(100, 100, 500, 500), instance.hwnd);
 
-	sf::Vector2u asciiSize = { 426, 144 };
+	sf::Vector2u asciiSize = { 150,100 };//{ 426, 144 };
 	AsciiDisplay ascii(asciiSize, 5);
-
+	raw.setPosition(600, 0);
 	sf::Clock clock;
 
+	float movingSpeed = 10.f;
+
 	while (instance.window.isOpen()) {
-		std::cout << 1.f / clock.getElapsedTime().asSeconds() << std::endl;
+		std::cout << "FPS: " << 1.f / clock.getElapsedTime().asSeconds() << std::endl;
 		clock.restart();
 		input();
+
+		
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+			raw.move({ 0.f,movingSpeed });
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+			raw.move({ 0.f,-movingSpeed });
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+			raw.move({ -movingSpeed,0.f });
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+			raw.move({ movingSpeed,0.f });
+
 
 		raw.update();
 		ascii.update(raw, asciiSize);
 
-		instance.window.clear(sf::Color(37, 37, 48));
-		//instance.window.draw(raw);
+		instance.window.clear(sf::Color::Black);
+		instance.window.draw(raw);
 		instance.window.draw(ascii);
 		instance.window.display();
 	}

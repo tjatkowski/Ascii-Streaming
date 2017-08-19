@@ -15,6 +15,7 @@ public:
 	sf::Vector2u getSize() const;
 	sf::Color getColor(const int &x, const int &y) const;
 	sf::Color getColor(const int &number) const;
+	void move(const sf::Vector2f &offset);
 
 	/*Update pixels*/
 	void update();
@@ -22,7 +23,7 @@ private:
 	
 
 	//Depens.
-	const sf::IntRect rect;
+	sf::IntRect rect;
 	HWND hwnd;
 	RGBQUAD *pixels;
 	sf::Color *colors;
