@@ -3,7 +3,8 @@
 #include <string>
 
 int main() {
-	std::string windowName = "Steam";
+	//std::string windowName = "Nowa karta - Google Chrome";
+	std::string windowName = "Counter-Strike: Global Offensive";
 	//std::cin >> windowName;
 	Application::setWindowName(windowName);
 	Application::run();

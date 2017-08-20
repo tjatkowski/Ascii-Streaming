@@ -27,9 +27,9 @@ void Application::run() {
 	if (instance.hwnd == NULL)
 		return;
 
-	ImageSource raw(sf::IntRect(100, 100, 500, 500), instance.hwnd);
+	ImageSource raw(sf::IntRect(0, 0, 700, 700), instance.hwnd);
 
-	sf::Vector2u asciiSize = { 150,100 };//{ 426, 144 };
+	sf::Vector2u asciiSize = { (unsigned int)(150*1.5),(unsigned int)(100*1.5) };//{ 426, 144 };
 	AsciiDisplay ascii(asciiSize, 5);
 	raw.setPosition(600, 0);
 	sf::Clock clock;
@@ -56,7 +56,7 @@ void Application::run() {
 		ascii.update(raw, asciiSize);
 
 		instance.window.clear(sf::Color::Black);
-		instance.window.draw(raw);
+		//instance.window.draw(raw);
 		instance.window.draw(ascii);
 		instance.window.display();
 	}

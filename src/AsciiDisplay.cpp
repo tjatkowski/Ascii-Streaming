@@ -15,8 +15,8 @@ AsciiDisplay::AsciiDisplay(const sf::Vector2u &size, const unsigned int charSize
 		display[i].setPosition(0, charSize * i);
 	}
 
-	//ascii = { ' ','.',',','°','•','¬','—','›','“','"','^','™','±','!',';','®','¤','§','€','¶','%','&','@','#' };
-	ascii = { ' ','-','-','@','@' };
+	//ascii = { ' ','.',',','¬','—','›','“','"','^','™','±','!',';','®','¤','§','€','¶','%','&','@','#','•', '°' };
+	ascii = { ' ','`','-','¬','+','±','#','@' };
 }
 
 void AsciiDisplay::update(const ImageSource &source, const sf::Vector2u &asciiSize)
