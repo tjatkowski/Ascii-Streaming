@@ -3,7 +3,7 @@
 #include <string>
 
 int main() {
-	std::string windowName = "Terraria: Also try Minecraft!";
+	std::string windowName = "Steam";
 	//std::cin >> windowName;
 	Application::setWindowName(windowName);
 	Application::run();
