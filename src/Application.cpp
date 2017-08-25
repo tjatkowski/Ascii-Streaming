@@ -16,7 +16,6 @@ Application & Application::getInstance()
 }
 
 
-
 void Application::setWindowName(const std::string newName) {
 	getInstance().windowName = newName;
 }

@@ -5,6 +5,8 @@
 
 #include "ImageSource.h"
 #include <iostream>
+#include <thread>
+#include <cmath>
 
 
 class AsciiDisplay : public sf::Drawable {
@@ -18,9 +20,6 @@ private:
 	virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
 	static std::vector<char> ascii;
 
-
-private:
-	//virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
 
 	sf::Font font;
 	Display display;
