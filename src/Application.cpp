@@ -26,11 +26,11 @@ void Application::run() {
 	if (instance.hwnd == NULL)
 		return;
 
-	ImageSource raw(sf::IntRect(0, 0, 700, 700), instance.hwnd);
+	ImageSource raw(sf::IntRect(0, 0, 1280, 720), instance.hwnd);
 
-	sf::Vector2u asciiSize = { (unsigned int)(150*1.5),(unsigned int)(100*1.5) };//{ 426, 144 };
+	//sf::Vector2u asciiSize = { (unsigned int)(150*1.5),(unsigned int)(100*1.5) };//{ 426, 144 };
+	const sf::Vector2u asciiSize = { 426, 144 };
 	AsciiDisplay ascii(asciiSize, 5);
-	raw.setPosition(600, 0);
 	sf::Clock clock;
 
 	float movingSpeed = 10.f;

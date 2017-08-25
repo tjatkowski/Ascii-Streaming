@@ -2,7 +2,6 @@
 
 ImageSource::~ImageSource(){
 	delete[] pixels;
-	delete[] colors;
 }
 
 RGBQUAD * ImageSource::getPixels() const
@@ -10,10 +9,6 @@ RGBQUAD * ImageSource::getPixels() const
 	return pixels;
 }
 
-sf::Color * ImageSource::getColors() const
-{
-	return colors;
-}
 
 sf::Vector2u ImageSource::getSize() const
 {
@@ -22,14 +17,15 @@ sf::Vector2u ImageSource::getSize() const
 
 
 
-sf::Color ImageSource::getColor(const int & x, const int & y) const
+float ImageSource::getColor(const int & x, const int & y) const
 {
 	return getColor(y*rect.width + x);
 }
 
-sf::Color ImageSource::getColor(const int & number) const
+float ImageSource::getColor(const int & number) const
 {
-	return colors[number];
+	RGBQUAD *pixel = pixels + number;
+	return static_cast<float>(pixel->rgbRed + pixel->rgbGreen + pixel->rgbBlue);
 }
 
 void ImageSource::move(const sf::Vector2f & offset)
@@ -59,13 +55,10 @@ ImageSource::ImageSource(const sf::IntRect & rect, const HWND &hwnd) :
 	bmi.bmiHeader.biCompression = BI_RGB;
 
 	pixels = new RGBQUAD[rect.width * rect.height];
-	colors = new sf::Color[rect.width * rect.height];
-	image.create(rect.width, rect.height, sf::Color(255, 0, 255));
 
 
 	update();
 
-	setTexture(texture);
 }
 
 
@@ -74,6 +67,7 @@ void ImageSource::update(){
 	BitBlt(hCaptureDC, 0, 0, rect.width, rect.height, hDesktopDC, rect.left, rect.top, SRCCOPY | CAPTUREBLT);
 	GetDIBits(hCaptureDC, hCaptureBitmap, 0, rect.height, pixels, &bmi, DIB_RGB_COLORS);
 
+	/*
 	for (int y = 0; y < rect.height; y++) {
 		for (int x = 0; x < rect.width; x++) {
 			//sf::Color *tempClr = colors + (((rect.height - 1) - y)*rect.width + x);
@@ -86,6 +80,7 @@ void ImageSource::update(){
 		}
 	}
 	texture.loadFromImage(image);
+	*/
 }
 
 

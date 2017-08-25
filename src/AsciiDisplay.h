@@ -7,6 +7,7 @@
 #include <iostream>
 #include <thread>
 #include <cmath>
+#include <mutex>
 
 
 class AsciiDisplay : public sf::Drawable {
@@ -20,6 +21,7 @@ private:
 	virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
 	static std::vector<char> ascii;
 
+	std::mutex displayMutex;
 
 	sf::Font font;
 	Display display;
